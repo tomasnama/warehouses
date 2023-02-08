@@ -1,0 +1,62 @@
+<mat-toolbar color="primary">
+  <span>{{title}}</span>
+  <span style=" flex: 1 1 auto;"></span>
+  <button mat-button (click)="back()">Volver</button>
+  <button mat-button (click)="save()">Guardar</button>
+  <button mat-button (click)="delete()" disabled="{{newRow}}">Eliminar</button>
+</mat-toolbar>
+<mat-card>
+  <mat-card-content>
+    <div style="display: flex; flex-direction: column">
+      <mat-form-field appearance="fill">
+        <mat-label>Almacen</mat-label>
+        <input type="number" required="true" (ngModelChange)="idChanged($event)" ngModel="row?.id" matInput
+          value="{{row?.id}}" readonly="{{!newRow}}">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Cliente</mat-label>
+        <input required="true" (ngModelChange)="clientChanged($event)" ngModel="row?.client" matInput
+          value="{{row?.client}}">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo</mat-label>
+        <mat-select required="true" (ngModelChange)="familyChanged($event)" ngModel="row?.family"
+          value="{{row?.family}}">
+          <mat-option value="EST">EST</mat-option>
+          <mat-option value="ROB">ROB</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Tamaño</mat-label>
+        <input type="number" required="true" (ngModelChange)="sizeChanged($event)" ngModel="row?.size" matInput
+          value="{{row?.size}}">
+      </mat-form-field>
+    </div>
+    <mat-toolbar color="primary">
+      <span>Instalaciones</span>
+      <span style=" flex: 1 1 auto;"></span>
+      <button mat-button (click)="openDialog()" disabled="{{newRow}}">Añadir</button>
+    </mat-toolbar>
+    <div class="example-table-container">
+      <table mat-table [dataSource]="racks" class="example-table" matSort matSortActive="id" matSortDisableClear
+        matSortDirection="desc">
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef>Instalación</th>
+          <td mat-cell *matCellDef="let row">{{row.id}}</td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef>Tipo</th>
+          <td mat-cell *matCellDef="let row">{{row.type}}</td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-button (click)="deleteRark(row.id)" color="primary">Eliminar</button>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+  </mat-card-content>
+</mat-card>

@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Añadir Instalación</h1>
+<div mat-dialog-content style="display: flex; flex-direction: column">
+  <mat-form-field appearance="fill">
+    <mat-label>Instalación</mat-label>
+    <input type="number" required="true" (ngModelChange)="idChanged($event)" ngModel="data.id" matInput >
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Tipo</mat-label>
+    <mat-select required="true" (ngModelChange)="typeChanged($event)" ngModel="data.type">
+      <mat-option value="A">A</mat-option>
+      <mat-option value="B">B</mat-option>
+      <mat-option value="C">C</mat-option>
+      <mat-option value="D">D</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Aceptar</button>
+</div>
